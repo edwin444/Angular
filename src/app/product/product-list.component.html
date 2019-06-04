@@ -1,0 +1,74 @@
+<div class='card'>
+    <div class='card-header'>
+        {{pageTitle}}
+    </div>
+    <div class='card-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter by</div>
+            <div class='col-md-4'>
+                <!--In two way binding we bind a class(in a component) to a template, ie [] means class property to 
+                    directive attr value and () means event on the directive to the class property value binding
+                    Hence, two way binding -->
+                <input type='text' [(ngModel)] = 'listFilter'/>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='col-md-6'>
+                <h4>Filtered by: {{listFilter}}</h4>
+            </div>
+        </div>
+
+        <div class='table-responsive'>
+            <table class='table' 
+                        *ngIf = 'products && products.length'>
+                <thead>
+                    <tr>
+                        <th>
+                            <button class='btn btn-primary'
+                                    (click) = 'toggleImage()'>
+                                {{showImage ? 'Hide ':'Show '}}Image
+                            </button>
+                        </th>
+                        <th>Product</th>
+                        <th>Code</th>
+                        <th>Available</th>
+                        <th>Price</th>
+                        <th>5 Star Rating</th>
+                    </tr>
+                    
+                </thead>
+
+                <tbody>
+                    <!--The 'of' means to iterate over the objects the iterable stores , the 'in' means to iterate over the index(0,1,2) in case of array or the properties in case of an object-->
+                    <tr *ngFor = 'let product of filteredProducts'>
+                        <td>
+                            <img [src] = 'product.imageUrl'
+                                 [title] = 'product.productName'
+                                 [style.width.px] = 'imageWidth'
+                                 [style.margin.px] = 'imageHeight'
+                                 *ngIf = 'showImage'>
+                        </td>
+                        <td>
+                            <a [routerLink]="['/products',product.productId]">
+                                {{product.productName}}
+                            </a>  
+                        </td>
+                        <td>{{product.productCode | lowercase | convertToSpaces:'-'}}</td>
+                        <td>{{product.releaseDate}}</td>
+                        <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
+                        <!-- we have a one way binding between starRating of product in the outer container
+                        to the inner container.Only @Input attributes are exposed to the outer container.-->
+                        <!--@Output ratingClicked attribute can pass an event to the parent container 
+                        and the parent container can take appropriate action
+                        by event binding where the event triggers another function in the parent container-->
+                        <td><pm-star 
+                            [rating]='product.starRating'
+                            (ratingClicked)='onRatingClicked($event)'></pm-star></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
