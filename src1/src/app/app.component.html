@@ -1,0 +1,36 @@
+
+<!--<p>
+<button type="button" class="btn btn-primary" (click)="openModalWithComponent()">Create template modal</button>
+</p>-->
+<div class="row">
+  <div class="col-md-12">
+    <!-- Input the ag-grid over here -->
+    <ag-grid-angular 
+      style="width: 450px; height: 500px;" 
+      class="ag-theme-balham"
+      [rowData]="rowData" 
+      [rowDragManaged]="true"
+      [animateRows]="true"
+      [columnDefs]="columnDefs"
+      [frameworkComponents]="frameworkComponents"
+      [rowSelection]="rowSelection"
+      [context] = "context"
+      (gridReady)="onGridReady($event)"
+      >
+    </ag-grid-angular>
+    <br>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-primary" (click)="openOuterModalComponent()">Add Attribute</button>
+  </div>
+</div>
+
+
+
+
+
+
+

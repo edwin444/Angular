@@ -1,0 +1,34 @@
+
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Modal for user id : {{ modalService.config.initialState.id }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="doAction()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <p>Enter the Attribute Name</p>
+  <input type="text" [(ngModel)]="newAttributeName">
+  <br>
+  <!--put attribute name and text box here-->
+  <ag-grid-angular 
+      style="width: 450px; height: 500px;" 
+      class="ag-theme-balham"
+      [rowData]="rowData" 
+      [rowDragManaged]="true"
+      [animateRows]="true"
+      [columnDefs]="columnDefs"
+      [frameworkComponents]="frameworkComponents"
+      [rowSelection]="rowSelection"
+      [context] = "context"
+      (gridReady)="onGridReady($event)"
+      >
+  </ag-grid-angular>
+
+  <br>
+  <button class="btn btn-primary" (click)="getAllDisplayedRows()">Submit</button>
+</div>
+
+
+
+

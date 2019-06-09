@@ -1,0 +1,28 @@
+<div class="modal-header" id="InnerModal">
+  <h4 class="modal-title pull-left">Modal for user id : {{ modalService.config.initialState.id }}</h4>
+  <button type="button" class="close pull-right" aria-label="false" (click)="doAction()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- Input the ag-grid over here -->
+  <ag-grid-angular 
+      style="width: 450px; height: 500px;" 
+      class="ag-theme-balham"
+      [rowData]="rowData" 
+      [rowDragManaged]="true"
+      [animateRows]="true"
+      [columnDefs]="columnDefs"
+      [frameworkComponents]="frameworkComponents"
+      [rowSelection]="rowSelection"
+      [context] = "context"
+      (gridReady)="onGridReady($event)"
+      >
+  </ag-grid-angular>
+  <br>
+  <!-- submit button to register the component -->
+  <button type="submit" (click)="getAllDisplayedRows()">
+    Submit
+  </button>
+</div>
+
